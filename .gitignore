@@ -1,0 +1,5 @@
+_StudyMaterials/
+test*/
+.vscode/
+*.zip
+*.pdf

@@ -1,0 +1,1212 @@
+&ACCESS RVO1
+DEF MIPO ( )
+
+END
+
+;@file MIPO.src
+;@brief  KRL library for calculating new base from the position and pose of the measured object
+;
+;  This library is part of a Batchlor's thesis I worked on while at Brno University of Technology.
+;  My ability to help you will depend on the following formula: x(t) = exp(-t/T); t = current_year - @date , T = spare_time
+;
+;@date 2020-06-07
+;@email  dominik.ricanek@gmail.com
+;@author Dominik Ricanek
+
+
+
+
+;@brief Calculate the new base from input data
+;
+;  Main function to be called. Keep in mind that the indices, that is the order of the measured points
+;  has to match the order of the points in model. Solution to having the measured points not ordered would require another
+;  level of complexity.
+;  On that note, this library could be potentially expanded to allow for disordered point clouds. Providing of course that the 
+;  point clouds are of the same object.
+;
+;@Attention Maximum number of points is 255!
+;
+;@in  MODEL_POINTS Array of points of the virtual model of an object
+;@in  MEAS_POINTS  Array of the measured points of the real object
+;@out DIFF  The difference between the measured points and the ones calculated from model points aftre applying rotation and translation
+;@in  NUM_OF_POINTS  Number of points in each point cloud
+;@in  TOLERANCE   Minimal tolerance the algorithms is going to use
+;@return RET_BASE Data type FRAME containing the translation vector (X,Y,Z) and rotation angles in degrees (A,B,C)
+GLOBAL DEFFCT FRAME BASE_FROM_POINTS(MODEL_POINTS[]:OUT, MEAS_POINTS[]:OUT, DIFF[]:OUT, NUM_OF_POINTS:IN, TOLERANCE:IN)
+   ; Declare the inputs
+   FRAME MODEL_POINTS[]
+   FRAME MEAS_POINTS[]
+   FRAME DIFF[]
+   INT NUM_OF_POINTS
+   REAL TOLERANCE
+
+   ; Declare the scope variables 
+   DECL REAL MODEL_MAT[4,255]
+   DECL REAL MEAS_MAT[4,255]
+   DECL REAL RESULT[4,255]
+   
+   DECL REAL ROT[4,4]
+   DECL REAL T[4]
+   
+   INT idx
+   REAL TMP_NUM
+   REAL THETA_X
+   REAL THETA_Y
+   REAL THETA_Z
+   
+   ; Declare the return variable
+   FRAME RET_BASE
+   
+   
+   ; Convert the input FRAME objects to matrix arrays
+   FOR idx = 1 TO NUM_OF_POINTS
+      MODEL_MAT[1,idx] = MODEL_POINTS[idx].X
+      MODEL_MAT[2,idx] = MODEL_POINTS[idx].Y
+      MODEL_MAT[3,idx] = MODEL_POINTS[idx].Z
+      
+      MEAS_MAT[1,idx] = MEAS_POINTS[idx].X
+      MEAS_MAT[2,idx] = MEAS_POINTS[idx].Y
+      MEAS_MAT[3,idx] = MEAS_POINTS[idx].Z
+      
+      RESULT[1,idx] = 0
+      RESULT[2,idx] = 0
+      RESULT[3,idx] = 0
+   ENDFOR
+   
+   ; Put bounderies around matrices and vertices
+   ROT[4,1] = -999
+   ROT[1,4] = -999
+   T[4] = -999
+   
+   ; Calculate the rotation matrix and traslation vector from input pointclouds which were converted to matrices
+   KABSCH(MEAS_MAT[,],MODEL_MAT[,],ROT[,],T[],NUM_OF_POINTS,TOLERANCE)
+   
+   ; Calculate the measured pointcloud from R and model pointcloud: R*MODEL_MAT + t = MEAS_MAT
+   MAT_X_MAT(ROT[,],MODEL_MAT[,],RESULT[,],3,3,NUM_OF_POINTS)
+   MAT_ADD_VEC(RESULT[,],T[],RESULT[,],NUM_OF_POINTS)
+   
+   ; Save the difference between point cloud B and the result of B = A*R+t
+   FOR idx = 1 TO NUM_OF_POINTS
+      DIFF[idx].X = MEAS_MAT[1,idx] - RESULT[1,idx]
+      DIFF[idx].Y = MEAS_MAT[2,idx] - RESULT[2,idx]
+      DIFF[idx].Z = MEAS_MAT[3,idx] - RESULT[3,idx]
+   ENDFOR
+   
+   IF (ROT[1,1]<>0) OR (ROT[2,1]<>0) OR (ROT[3,2]<>0) OR (ROT[3,3]<>0) THEN
+      ; Calculate the euler angles of our rotation matrix
+      ; Note: Special case when THETA_Y is exactly +-PI/2
+      THETA_X = ATAN2(ROT[3,2], ROT[3,3])
+      TMP_NUM = SQRT((ROT[3,2]*ROT[3,2]+ROT[3,3]*ROT[3,3]))
+      THETA_Y = ATAN2(-ROT[3,1], TMP_NUM)
+      THETA_Z = ATAN2(ROT[2,1], ROT[1,1])
+      
+      ; Translation in the x,y and z direction
+      RET_BASE.X = T[1]
+      RET_BASE.Y = T[2]
+      RET_BASE.Z = T[3]
+      
+      ; R = RzRyRx
+      RET_BASE.A = THETA_Z
+      RET_BASE.B = THETA_Y
+      RET_BASE.C = THETA_X
+   ELSE
+      ; In case of a singularity, the base will remain the same.
+      ; This case should never arrise
+      RET_BASE.X = 0
+      RET_BASE.Y = 0
+      RET_BASE.Z = 0
+      
+      RET_BASE.A = 0
+      RET_BASE.B = 0
+      RET_BASE.C = 0
+   ENDIF
+
+RETURN RET_BASE
+ENDFCT
+
+
+;*****************************************************************;
+;                                                                 ;
+;                           ALGORITHMS                            ;
+;                                                                 ;
+;  In this section you will find the various algorithms used in   ;
+;  the Kabsch algorithm (e.g. QR decomposition, SVD, etc.)        ;
+;                                                                 ;
+;*****************************************************************;
+
+;@brief Calculate the determinant of a 3x3 matrix
+;
+;  Originally it was supposed to be universal for all matrix sizes,
+;  however such complexity would be unnecessary in my case.
+;  If you're looking for inspiration research the row echelon method
+;  for calculating a determinant.
+;
+;@in IMAT
+;@return Determinant of the input matrix
+DEFFCT REAL DET(IMAT[,]:OUT)
+
+   DECL REAL IMAT[,]
+   DECL REAL RET_DET
+   
+   RET_DET = 0
+   
+   ; Safe guard against using other matrix than a 3x3
+   IF (IMAT[4,1] <> -999) OR (IMAT[1,4] <> -999) THEN
+      RETURN RET_DET
+   ENDIF
+   
+   ; Now since I am only going to be using 3x3, I can use the Sarrus' scheme
+   RET_DET = (IMAT[1,1]*IMAT[2,2]*IMAT[3,3]) + (IMAT[1,2]*IMAT[2,3]*IMAT[3,1]) + (IMAT[1,3]*IMAT[2,1]*IMAT[3,2])
+   RET_DET = RET_DET - (IMAT[3,1]*IMAT[2,2]*IMAT[1,3]) - (IMAT[2,1]*IMAT[1,2]*IMAT[3,3]) - (IMAT[1,1]*IMAT[3,2]*IMAT[2,3])
+   
+
+RETURN RET_DET
+ENDFCT
+
+;@brief Calculates the magnitude of a vector
+;
+;  Used in the QR decomposition algo
+;
+;@in IVEC
+;@in ISIZE
+;@return Magnitude of the vector
+DEFFCT REAL MAG_OF_VEC(IVEC[]:OUT, ISIZE:IN)
+   DECL REAL IVEC[]
+   DECL INT ISIZE
+   DECL REAL RET
+
+   ; Scope vars
+   DECL INT i
+
+   RET = 0.0
+
+   FOR i = 1 TO ISIZE STEP 1
+      RET = RET + (IVEC[i] * IVEC[i])
+   ENDFOR
+
+   RET = SQRT(RET)
+   
+   RETURN RET
+ENDFCT
+
+;@brief Calculates the centroid of the measured point cloud
+;
+;  Centroid is used to reference the measured data to the origin
+;  of our coord system.
+;
+;@in IMAT   Measured pointcloud in the form of a 3xN matrix
+;@in ISIZE Number of points in the pointcloud
+;@out OVEC  Centroid as a column vector
+DEF CENTROID(IMAT[,]:OUT, OVEC[]:OUT, ISIZE:IN)
+   DECL REAL IMAT[,]
+   DECL REAL OVEC[]
+   DECL INT ISIZE
+
+   ; Scope vars
+   DECL INT i,j
+   
+   ; Bound the centroid
+   OVEC[4] = -999
+   
+   ; Initialize the returned vector
+   FOR i = 1 TO 3 STEP 1
+      FOR j = 1 TO ISIZE STEP 1
+         OVEC[i] = 0.0
+      ENDFOR
+   ENDFOR
+   
+   ; Coords are never going to be larger than 3D
+   FOR i = 1 TO 3 STEP 1
+      FOR j = 1 TO ISIZE STEP 1
+         OVEC[i] = OVEC[i] + IMAT[i,j]
+      ENDFOR
+   ENDFOR
+
+   FOR i = 1 TO 3 STEP 1
+      OVEC[i] = OVEC[i]/ISIZE ; Praying that KSS can do REAL/INT
+   ENDFOR
+END
+
+;@brief Calculate the QR decomposition of a 3x3 square matrix
+;
+;  A QR decomposition assumes that any square matrix A can be written \n
+;  as the product of an orthogonal matrix Q and an upper triangular matrix R. \n\n
+;  A = Q * R \n\n
+;  A very handy property of this algorithm is that Q is by definition going to be \n
+;  be the basis of eigenvectors and R will have the eigenvalues on its diagonal.
+;
+;  Since a variable cannot be used in declaration as size of the array
+;  this algorithms is specific to 3x3 mats.
+;  This doesn't complicate things, because it will be used solely on
+;  3x3 matrices.
+;
+;@in  IMAT  Matrix to be decomposed
+;@out OQ    Q portion
+;@out O_R   R portion
+DEF QR(IMAT[,]:OUT, OQ[,]:OUT, O_R[,]:OUT)
+   DECL REAL IMAT[,]
+   DECL REAL OQ[,]
+   DECL REAL O_R[,]
+   
+   ; Scope variables
+   DECL REAL x[4]
+   DECL REAL u[4]
+   DECL REAL v[4]
+   DECL REAL e[4]
+   DECL REAL tmp_vec[4]
+   
+   DECL REAL I_MAT[4,4]
+   DECL REAL A[4,4]
+   DECL REAL Q_heap[4,4,2]
+   DECL REAL tmp_mat[4,4]
+   DECL REAL tmp_Q[4,4]
+   
+   DECL REAL ALPHA
+   DECL REAL SIGN
+   DECL REAL tmp_num
+   DECL INT ISIZE
+   
+   DECL INT i,j,k
+
+   ; Initialize vertices and matrices
+   FOR i = 1 TO 3
+      FOR j = 1 TO 3
+         I_MAT[i,j] = 0.0
+         A[i,j] = 0.0
+         tmp_mat[i,j] = 0.0
+         tmp_Q[i,j] = 0.0
+         Q_heap[i,j,1] = 0.0
+         Q_heap[i,j,2] = 0.0
+      ENDFOR
+      x[i] = 0.0
+      u[i] = 0.0
+      v[i] = 0.0
+      e[i] = 0.0
+   ENDFOR
+   
+   ; As per my rules, set up bounderies of all vertices and matrices
+      x[4] = BOUND
+      u[4] = BOUND
+      v[4] = BOUND
+      e[4] = BOUND
+      tmp_vec[4] = BOUND
+      
+      I_MAT[4,1] = BOUND
+      I_MAT[1,4] = BOUND
+      
+      A[4,1] = BOUND
+      A[1,4] = BOUND
+      
+      tmp_mat[4,1] = BOUND
+      tmp_mat[1,4] = BOUND
+      
+      tmp_Q[4,1] = BOUND
+      tmp_Q[1,4] = BOUND
+      
+      Q_heap[4,1,1] = BOUND
+      Q_heap[1,4,1] = BOUND
+      Q_heap[4,1,2] = BOUND
+      Q_heap[1,4,2] = BOUND
+   
+   ; Initialize the scope vars
+   ISIZE = 3
+   ALPHA = 0.0
+   SIGN = 1.0
+   tmp_num = 0
+   
+   ; Copy input matrix into A
+   FOR i = 1 TO 3
+      FOR j = 1 TO 3
+         A[i,j] = IMAT[i,j]
+      ENDFOR
+   ENDFOR
+   
+   FOR i = 1 TO (ISIZE - 1)
+      ISIZE = ISIZE - (i-1)
+      
+      MAT_MAKE_I(I_MAT[,],ISIZE)
+      
+      ; Resize our vectors by moving the boundery
+      x[(ISIZE+1)] = BOUND
+      u[(ISIZE+1)] = BOUND
+      v[(ISIZE+1)] = BOUND
+      e[(ISIZE+1)] = BOUND
+      e[1] = 1.0
+      
+      ; Resize our matrices
+      I_MAT[(ISIZE+1),(ISIZE+1)] = BOUND
+      
+      ; Separate a column of A into a vector
+      FOR j = i TO 3
+         x[(j-i)+1] = A[j,i]
+      ENDFOR
+      
+      IF (x[1] > 0.0) THEN
+         SIGN = -1.0
+      ELSE
+         SIGN = 1.0
+      ENDIF
+      
+      ALPHA = MAG_OF_VEC(x[], ISIZE)
+      
+      IF (ALPHA > 0) THEN
+         ; Calculate vector u = x - (e * alpha * sign)
+            tmp_num = ALPHA * SIGN
+            VEC_X_SCAL(e[],tmp_num,tmp_vec[],ISIZE)
+            VEC_SUB_VEC(x[],tmp_vec[],u[],ISIZE)
+          
+         ; Calculate vector v = u *(1/|u|)
+         tmp_num = MAG_OF_VEC(u[], ISIZE)
+         tmp_num = (1.0/tmp_num)
+         VEC_X_SCAL(u[],tmp_num,v[],ISIZE)
+         
+         ; Calculate matrix Q = I - (v*v') * 2
+         VEC_X_VEC(v[],v[],tmp_mat[,],ISIZE)
+         MAT_X_SCAL(tmp_mat[,],2,tmp_mat[,],ISIZE,ISIZE)
+         MAT_SUB_MAT(I_MAT[,],tmp_mat[,],tmp_Q[,],ISIZE,ISIZE)
+         
+         ; Insert the matrix tmp_Q into the bottom right corner of a 3x3 matrix
+         MAT_INSERT(tmp_Q[,],tmp_mat[,],(i-1))
+         
+         ; Calculate A = tmp_mat * A
+         MAT_X_MAT(tmp_mat[,],A[,],tmp_Q[,],3,3,3)
+         
+         ; Update A with the tmp_Q values and put tmp_mat into Q_heap
+         FOR j = 1 TO 3
+            FOR k = 1 TO 3
+               A[j,k] = tmp_Q[j,k]
+               Q_heap[j,k,i] = tmp_mat[j,k]
+            ENDFOR
+         ENDFOR  
+      ENDIF
+      ; Else if ALPHA is 0 dont do anything 
+   
+   ENDFOR
+   
+   ; Change ISIZE to previous value
+   ISIZE = 3
+   
+   ; And now for the actual Q and R calculations
+      ; Store Q1 in a tmp matrix
+      FOR i = 1 TO ISIZE
+         FOR j = 1 TO ISIZE
+            tmp_mat[i,j] = Q_heap[i,j,1]
+         ENDFOR 
+      ENDFOR 
+      
+      ; Store Q1' in OQ matrix      
+      MAT_TRANS(tmp_mat[,],OQ[,],3,3)
+
+      ; Store OQ in tmp_Q matrix
+      FOR i = 1 TO ISIZE
+         FOR j = 1 TO ISIZE
+            tmp_Q[i,j] = OQ[i,j]
+         ENDFOR 
+      ENDFOR
+      
+      ; Store Q2 in OQ matrix
+      FOR i = 1 TO ISIZE
+         FOR j = 1 TO ISIZE
+            OQ[i,j] = Q_heap[i,j,2]
+         ENDFOR 
+      ENDFOR 
+         
+      ; Store Q2' in tmp matrix
+      MAT_TRANS(OQ[,],tmp_mat[,],3,3)
+      ; Calculate Q = Q1'*Q2'
+      MAT_X_MAT(tmp_Q[,],tmp_mat[,],OQ[,],3,3,3)
+   
+   ; Calculate R = Q'*A
+   MAT_TRANS(OQ[,],tmp_mat[,],3,3)
+   MAT_X_MAT(tmp_mat[,],IMAT[,],O_R[,],3,3,3)
+   
+END
+
+; @brief Calculate eigenvalues and eigenvectors
+;
+;@note If tol isn't being reached, consider changing the iteration limit in the QR algorithm
+;
+;@attention Won't work properly for any matrix greater than 3x3
+;@in IMAT Input matrix A
+;@out OEIGNUM Matrix of eigenvalues
+;@out OEIGVEC Matrix of eigenvectors
+;@in tol Tolerance defining the precision of the algorithm
+DEF EIGEN(IMAT[,]:OUT, OEIGVEC[,]:OUT, OEIGNUM[,]:OUT, ITOL:IN)
+   
+   DECL REAL IMAT[,]
+   DECL REAL OEIGVEC[,]
+   DECL REAL OEIGNUM[,]
+   DECL REAL ITOL
+   
+   DECL REAL A[4,4]
+   DECL REAL Q[4,4]
+   DECL REAL R[4,4]
+   DECL REAL Q_queue[4,4,100]
+   DECL REAL tmp_Q[4,4]
+   DECL REAL tmp_mat[4,4]
+   
+   DECL INT i,j,k,iter
+   DECL INT ISIZE
+   DECL INT MAX_ITER
+   DECL BOOL COND
+   
+   ; Initialize scope vars
+   iter = 1
+   ISIZE = 3
+   MAX_ITER = 100
+   COND = TRUE
+   
+   ; Put up bounderies
+   A[4,1] = BOUND
+   A[1,4] = BOUND
+   
+   Q[4,1] = BOUND
+   Q[1,4] = BOUND
+   
+   R[4,1] = BOUND
+   R[1,4] = BOUND
+   
+   tmp_Q[4,1] = BOUND
+   tmp_Q[1,4] = BOUND
+   
+   tmp_mat[4,1] = BOUND
+   tmp_mat[1,4] = BOUND
+   
+   FOR i = 1 TO MAX_ITER
+      Q_queue[4,1,i] = BOUND
+      Q_queue[1,4,i] = BOUND
+   ENDFOR
+   
+   ; Copy input matrix into A
+   FOR i = 1 TO ISIZE
+      FOR j = 1 TO ISIZE
+         A[i,j] = IMAT[i,j]
+      ENDFOR      
+   ENDFOR
+
+   QR(A[,], Q[,], R[,])
+   
+   WHILE(COND)
+      ; Put previous Q into the queue and save prev_Q for checking the tolerance
+      FOR i = 1 TO ISIZE
+         FOR j = 1 TO ISIZE
+            Q_queue[i,j,iter] = Q[i,j]
+            tmp_Q[i,j] = Q[i,j]
+         ENDFOR      
+      ENDFOR
+         
+      ; Calculate new A matrix
+      MAT_X_MAT(R[,],Q[,],A[,],3,3,3)
+
+      ; Calculate QR decomposition of the new A matrix
+      QR(A[,], Q[,], R[,])
+      
+      ; Update the looping condition
+      COND = FALSE
+      MAT_SUB_MAT(tmp_Q[,], Q[,],tmp_mat[,],3,3)
+      FOR i = 1 TO ISIZE
+         FOR j = 1 TO ISIZE
+            COND = COND OR (tmp_mat[i,j] > ITOL)
+            COND = COND OR (tmp_mat[i,j] < (-1*ITOL))
+            ;COND = COND OR NOT((tmp_mat[i,j] > ITOL) AND (tmp_mat[i,j] < (-1*ITOL)))
+         ENDFOR
+      ENDFOR
+         
+      iter = iter + 1
+      IF (iter > 100) THEN
+         COND = FALSE
+      ENDIF
+   ENDWHILE
+
+   ; Enqueue the last calculated value and prepare tmp_Q for further calculations
+   FOR i = 1 TO ISIZE
+      FOR j = 1 TO ISIZE
+         Q_queue[i,j,(iter-1)] = Q[i,j]
+         tmp_Q[i,j] = Q_queue[i,j,1]
+      ENDFOR      
+   ENDFOR
+      
+   ; Calculate the final Q
+   FOR k = 2 TO (iter - 1)
+      ; Copy the value from queue into tmp_mat
+      FOR i = 1 TO ISIZE
+         FOR j = 1 TO ISIZE
+            tmp_mat[i,j] = Q_queue[i,j,k]
+         ENDFOR      
+      ENDFOR
+      
+      ; Calculate the Q = Qn*Qn+1
+      MAT_X_MAT(tmp_Q[,],tmp_mat[,],Q[,],3,3,3)
+      
+      ; Update tmp_Q
+      FOR i = 1 TO ISIZE
+         FOR j = 1 TO ISIZE
+            tmp_Q[i,j] = Q[i,j]
+         ENDFOR      
+      ENDFOR      
+   ENDFOR      
+   
+   ; A matrix should now contain eigen values
+   ; Q matrix has eigen vectors
+   FOR i = 1 TO ISIZE
+      FOR j = 1 TO ISIZE
+         OEIGNUM[i,j] = A[i,j]
+         OEIGVEC[i,j] = Q[i,j]
+      ENDFOR      
+   ENDFOR 
+END
+
+;@brief Computes the singular value decomposition on a square matrix
+; 
+; Applying SVD to a NxM matrix is possible, but works differently and should be \n
+; programmed separately. \n
+; The singular values and unary eigenvectors are calculated via QR decomposition. \n
+; The right eigenvector matrix will be calculated from the left eigenvector matrix and singular values.
+; 
+;@in IMAT
+;@out OU
+;@out OS
+;@out OV
+;@in ITOL
+DEF SVD(IMAT[,]:OUT, OU[,]:OUT, OS[,]:OUT, OV[,]:OUT, ITOL:IN)
+   
+   DECL REAL IMAT[,]
+   DECL REAL OU[,]
+   DECL REAL OS[,]
+   DECL REAL OV[,]
+   DECL REAL ITOL
+   
+   DECL REAL A[4,4]
+   DECL REAL AAT[4,4]
+   DECL REAL trans_A[4,4]
+   DECL REAL inv_S[4,4]
+   DECL REAL tmp_mat[4,4]
+   
+   DECL INT i,j
+   DECL INT ISIZE
+   
+   ; Set up bounderies
+   A[4,1] = BOUND
+   A[1,4] = BOUND
+   
+   AAT[4,1] = BOUND
+   AAT[1,4] = BOUND
+   
+   trans_A[4,1] = BOUND
+   trans_A[1,4] = BOUND
+   
+   inv_S[4,1] = BOUND
+   inv_S[1,4] = BOUND
+   
+   tmp_mat[4,1] = BOUND
+   tmp_mat[1,4] = BOUND
+   
+   ; Initialize scope vars
+   ISIZE = 3
+   
+   ; Inizialize inv_S and copy input matrix into A matrix
+   FOR i = 1 TO ISIZE
+      FOR j = 1 TO ISIZE
+         inv_S[i,j] = 0.0
+         A[i,j] = IMAT[i,j]
+      ENDFOR
+   ENDFOR
+
+   ; Calculate AAT = A * A'
+   MAT_TRANS(A[,],trans_A[,],ISIZE,ISIZE)
+   MAT_X_MAT(A[,],trans_A[,],AAT[,],ISIZE,ISIZE,ISIZE)
+
+   ; Calculate one of the singular vectors using EIGEN()
+   ; this will yield both singular vector U and squared singular values S
+   EIGEN(AAT[,],OU[,],OS[,],ITOL)
+
+   ; S contains the square root of eigenvalues and must be purely diagonal
+   FOR i = 1 TO ISIZE
+      FOR j = 1 TO ISIZE
+         IF(i == j) THEN
+            IF(OS[i,j] < 0.0) THEN
+               OS[i,j] = OS[i,j] * (-1)
+            ENDIF
+            OS[i,j] = SQRT(OS[i,j])
+         ELSE
+            OS[i,j] = 0.0
+         ENDIF
+         
+      ENDFOR
+   ENDFOR
+
+   ; Now calculate the right singular vector from the left one
+   FOR i = 1 TO ISIZE
+      inv_S[i,i] = 1.0/OS[i,i]
+   ENDFOR
+
+   MAT_X_MAT(OU[,],inv_S[,],tmp_mat[,],ISIZE,ISIZE,ISIZE)
+   MAT_X_MAT(trans_A[,],tmp_mat[,],OV[,],ISIZE,ISIZE,ISIZE)
+
+   ; OU and OV now hold left and right singular vectors
+   ; OS is a matrix of singular values
+END
+
+;@brief Applies the Kabsch's algorithm to a pointcloud
+;
+;  Output is a rotation matrix R and translation vector t mapping points of pointcloud B to points of pointcloud A.
+;  R and t can be applied to the base vectors as well, calculating a new basis.
+;
+;@in  PC_A  Pointcloud A
+;@in  PC_B  Pointcloud B
+;@out ORMAT Rotation matrix: R*B = A0
+;@out OTVEC Translation vector: A0 + t = A
+;@in  ICOL  Number of points in pointclouds A and B
+;@in  ITOL  Tolerance
+DEF KABSCH(PC_A[,]:OUT, PC_B[,]:OUT, ORMAT[,]:OUT, OTVEC[]:OUT, ICOL:IN, ITOL:IN)
+
+   DECL REAL PC_A[,]
+   DECL REAL PC_B[,]
+   DECL REAL ORMAT[,]
+   DECL REAL OTVEC[]
+   DECL INT ICOL
+   DECL REAL ITOL
+   
+   ; Scope variables
+   DECL REAL U[4,4]
+   DECL REAL S[4,4]
+   DECL REAL V[4,4]
+   
+   DECL REAL A[4,255]   ; Reference
+   DECL REAL B[4,255]   ; Model
+   DECL REAL centroidA[4]
+   DECL REAL centroidB[4]
+   
+   DECL REAL H[4,4]
+   DECL REAL B_trans[255,4]
+   
+   DECL REAL tmp_mat[4,4]
+   DECL REAL tmp_vec[4]
+   
+   DECL REAL tmp
+   DECL INT ISIZE
+   DECL INT i
+
+   ; Bound mats and vecs
+   U[4,1] = BOUND
+   U[1,4] = BOUND
+   S[4,1] = BOUND
+   S[1,4] = BOUND
+   V[4,1] = BOUND
+   V[1,4] = BOUND
+   
+   A[4,1] = BOUND
+   A[1,ICOL] = BOUND
+   B[4,1] = BOUND
+   B[1,ICOL] = BOUND
+   centroidA[4] = BOUND
+   centroidB[4] = BOUND
+
+   H[4,1] = BOUND
+   H[1,4] = BOUND
+   B_trans[ICOL,1] = BOUND
+   B_trans[1,4] = BOUND
+   
+   tmp_mat[4,1] = BOUND
+   tmp_mat[1,4] = BOUND
+   tmp_vec[4] = BOUND
+   
+   ; Initialize scope vars
+   ISIZE = 3
+   
+   ; Calculate the centroids and save them to centroidA and centroidB
+   CENTROID(PC_B[,],centroidA[],ICOL)
+   CENTROID(PC_A[,],centroidB[],ICOL)   
+
+   ; Calculate the normalized A and B matrices
+   MAT_SUB_VEC(PC_B[,],centroidA[],A[,],ICOL)
+   MAT_SUB_VEC(PC_A[,],centroidB[],B[,],ICOL)
+   
+   ; Transpose of B to be used in H calculation
+   MAT_TRANS(B[,],B_trans[,],ICOL,ISIZE)
+
+   ; Calculate the invariance matrix H
+   MAT_X_MAT(A[,],B_trans[,],H[,],3,ICOL,3)
+   
+   ; Apply SVD decomposition
+   SVD(H[,], U[,], S[,], V[,], ITOL)
+   
+   ; No simply calculate the rotation matrix R and translation vecto t
+   MAT_TRANS(U[,],tmp_mat[,],ISIZE,ISIZE)
+   MAT_X_MAT(V[,],tmp_mat[,],ORMAT[,],ISIZE,ISIZE,ISIZE)
+   
+   ; Check det(R) and flip signs of last column if its negative
+   tmp = DET(ORMAT[,])
+   
+   IF tmp < 0.0 THEN
+      FOR i = 1 TO ISIZE
+         ; Multiply the last column by -1
+         V[ISIZE,i] = V[i,ISIZE] * (-1.0)
+      ENDFOR
+      MAT_TRANS(U[,],tmp_mat[,],ISIZE,ISIZE)
+      MAT_X_MAT(V[,],tmp_mat[,],ORMAT[,],ISIZE,ISIZE,ISIZE)
+   ENDIF
+   
+   MAT_X_VEC(ORMAT[,],centroidA[],tmp_vec[],ISIZE,ISIZE)
+   VEC_SUB_VEC(centroidB[],tmp_vec[],OTVEC[],ISIZE)
+   
+   ; ORMAT now contains the rotation matrix R
+   ; OTVEC contains translation vector t
+END
+
+
+;*****************************************************************;
+;                                                                 ;
+;                           OPERATORS                             ;
+;                                                                 ;
+;  This section contains the operators of linear algebra allowing ;
+;  for things like vertix multiplication and other fun stuff.     ;
+;                                                                 ;
+;*****************************************************************;
+
+;@brief Multiplies vector with a scalar.
+;
+;@todo Redundant
+;@in NUM Scalar
+;@out OVEC Vector passed by reference (pbr)
+DEF SCALAR_X_VEC(INUM:IN, OVEC[]:OUT, ISIZE:IN)
+   ; Declare inputs/outputs
+   DECL REAL INUM
+   DECL REAL OVEC[]
+   DECL INT ISIZE
+   
+   ; Declare scope variables
+   DECL INT i
+   
+   ; Ensure the vector is bounded
+   OVEC[ISIZE + 1] = BOUND
+   
+   ; A vector is always going to be of size 3
+   FOR i=1 to ISIZE
+      OVEC[i] = OVEC[i]*INUM
+   ENDFOR
+END
+
+;@brief Multiply a matrix by a vector and assign to that vector.
+; 
+; Assumes a Nx3 matrix and a column vector of size 3.
+; The only time I'll have to compute with a larger matrix is
+; going to be when multiplying it with a rotation matrix
+; or getting a H matrix by multiplying the large matrix itself
+; with its transpose. Hence the assumption.
+;
+;  |a|   |11 12 13|   |x|
+;  |b| = |21 22 23| * |y|
+;  |c|   |31 32 33|   |z|
+;
+;@in  IMAT  Right side matrix
+;@in  IVEC  Left side vector
+;@in  IROW  Number of rows of the matrix
+;@in  ISIZE Size of the vector
+;@out OVEC  Output vector of the same size as number of rows of the matrix
+DEF MAT_X_VEC(IMAT[,]:OUT, IVEC[]:OUT, OVEC[]:OUT, IROW:IN, ISIZE:IN)
+   ; Inputs/outputs
+   DECL REAL IMAT[,]
+   DECL REAL IVEC[]
+   DECL REAL OVEC[]
+   DECL INT ISIZE
+   DECL INT IROW
+   
+
+   ; Scope vars
+   DECL INT i,j
+   
+   ; Bound the vector
+   OVEC[IROW + 1] = BOUND
+   
+   FOR i = 1 to IROW
+      OVEC[i] = 0.0
+   ENDFOR
+      
+   FOR i = 1 to IROW
+      FOR j = 1 to ISIZE
+         OVEC[i] = OVEC[i] + (IMAT[i,j] * IVEC[j])
+      ENDFOR
+   ENDFOR
+   
+END
+
+;@brief Multiply two matrices of sizes 3xN and Nx3
+; 
+; Calculates a 3x3 square matrix. Because linear algebra
+; is a pain to work with, this operation can have two results
+; depending on the order of operands.
+; Example:
+;
+;  |a b c|   |11 12 13 14|   |11 12 13|
+;  |d e f| = |21 22 23 24| * |21 22 23|
+;  |g i h|   |31 32 33 34|   |31 32 33|
+;                            |41 42 43|
+;
+;@in  MAT1  Input matrix YxN
+;@in  MAT2  Input matrix NxZ
+;@in  IROW1 Value of Y
+;@in  ICOL2 Value of Z
+;@in  ISIZE Value of N
+;@out OMAT  Output matrix YxZ
+DEF MAT_X_MAT(IMAT1[,]:OUT, IMAT2[,]:OUT, OMAT[,]:OUT, IROW1:IN, ISIZE:IN, ICOL2:IN)
+   ; Inputs/outputs
+   DECL REAL IMAT1[,]
+   DECL REAL IMAT2[,]
+   DECL REAL OMAT[,]
+   DECL INT IROW1
+   DECL INT ICOL2
+   DECL INT ISIZE
+
+   ; Scope vars
+   DECL INT i,j,k
+   
+   ; Right away I am going to put bounderies around the square matrix
+   OMAT[1, (ICOL2 + 1)] = BOUND
+   OMAT[(IROW1 + 1), 1] = BOUND
+      
+   FOR i = 1 to IROW1 STEP 1
+      FOR j = 1 to ICOL2 STEP 1
+         OMAT[i, j] = 0.0
+      ENDFOR
+   ENDFOR
+   
+   FOR k = 1 to IROW1 STEP 1
+      FOR i = 1 to ICOL2 STEP 1
+         FOR j = 1 to ISIZE STEP 1
+            OMAT[k,i] = OMAT[k,i] + (IMAT1[k,j] * IMAT2[j,i])
+         ENDFOR
+      ENDFOR
+   ENDFOR
+         
+END
+
+;@brief Subtract a vector from a matrix
+; 
+; Assumes a 3xN matrix and a column vector.
+; Used to subtract the centroid from given point clouds.
+;
+;  |a|   |11 12 13 14|   |x|
+;  |b| = |21 22 23 24| - |y|
+;  |c|   |31 32 33 43|   |z|
+;
+;@in  OMAT Subtracted matrix
+;@in  ICOL Number of columns of the matrix (e.i. number of measured points)
+;@out IVEC Subtrahend vector
+DEF MAT_SUB_VEC(IMAT[,]:OUT, IVEC[]:OUT, OMAT[,]:OUT, ICOL:IN)
+   ; Inputs/outputs
+   DECL REAL IMAT[,]
+   DECL REAL OMAT[,]
+   DECL REAL IVEC[]
+   DECL INT ICOL
+
+   ; Scope vars
+   DECL INT i,j
+      
+   FOR i = 1 to 3
+      FOR j = 1 to ICOL
+         OMAT[i, j] = IMAT[i,j] - IVEC[i]
+      ENDFOR
+   ENDFOR
+   
+END
+;@brief Adds a vector to a matrix
+; 
+; Assumes a 3xN matrix and a column vector.
+; Used to add the translation vector after applying rotation to the measured pointcloud.
+;
+;  |a|   |11 12 13 14|   |x|
+;  |b| = |21 22 23 24| + |y|
+;  |c|   |31 32 33 43|   |z|
+;
+;@in  OMAT Subtracted matrix
+;@in  ICOL Number of columns of the matrix (e.i. number of measured points)
+;@out IVEC Subtrahend vector
+DEF MAT_ADD_VEC(IMAT[,]:OUT, IVEC[]:OUT, OMAT[,]:OUT, ICOL:IN)
+   ; Inputs/outputs
+   DECL REAL IMAT[,]
+   DECL REAL OMAT[,]
+   DECL REAL IVEC[]
+   DECL INT ICOL
+
+   ; Scope vars
+   DECL INT i,j
+      
+   FOR i = 1 to 3
+      FOR j = 1 to ICOL
+         OMAT[i, j] = IMAT[i,j] + IVEC[i]
+      ENDFOR
+   ENDFOR
+   
+END
+
+;@brief computes v1 x v2 where v1 is a column vector and v2 is a row vector
+;
+;      |x1|
+;  A = |y1| * |x2 y2 z2|
+;      |z1|
+;
+;@in  IVEC1
+;@in  IVEC2
+;@in  ISIZE Size of the vectors
+;@out OMAT  A square matrix
+DEF VEC_X_VEC(IVEC1[]:OUT, IVEC2[]:OUT, OMAT[,]:OUT, ISIZE:IN)
+
+   ; Inputs/outputs
+   DECL REAL OMAT[,]
+   DECL REAL IVEC1[]
+   DECL REAL IVEC2[]
+   DECL INT ISIZE
+   
+   ; Scope vars
+   DECL INT i,j
+   
+   ; Right away I am going to put bounderies around the square matrix
+   OMAT[1, (ISIZE + 1)] = BOUND
+   OMAT[(ISIZE + 1), 1] = BOUND
+   
+   FOR i = 1 to ISIZE
+      FOR j = 1 to ISIZE
+         OMAT[j,i] = IVEC1[j] * IVEC2[i]
+      ENDFOR
+   ENDFOR
+
+END
+
+;@brief Subtracts v2 from v1 where v2 and v1 are column vectors
+;
+;      |x1|   |x2|
+;  v = |y1| - |y2|
+;      |z1|   |z2|
+;
+;@in IVEC1
+;@in IVEC2
+;@in ISIZE  Size of the vectors
+;@out OVEC A column vector
+DEF VEC_SUB_VEC(IVEC1[]:OUT, IVEC2[]:OUT, OVEC[]:OUT, ISIZE:IN)
+   
+   ; Inputs/outputs
+   DECL REAL OVEC[]
+   DECL REAL IVEC1[]
+   DECL REAL IVEC2[]
+   DECL INT ISIZE
+   
+   ; Scope vars
+   DECL INT i
+   
+   ; Bound the output vector
+   OVEC[ISIZE + 1] = BOUND
+   
+   FOR i = 1 to ISIZE
+      OVEC[i] = IVEC1[i] - IVEC2[i]
+   ENDFOR
+   
+END
+
+;@brief Adds v2 from v1 where v2 and v1 are column vectors
+;
+;      |x1|   |x2|
+;  v = |y1| + |y2|
+;      |z1|   |z2|
+;
+;@in IVEC1
+;@in IVEC2
+;@in ISIZE  Size of the vectors
+;@out OVEC A column vector
+DEF VEC_ADD_VEC(IVEC1[]:OUT, IVEC2[]:OUT, OVEC[]:OUT, ISIZE:IN)
+   
+   ; Inputs/outputs
+   DECL REAL OVEC[]
+   DECL REAL IVEC1[]
+   DECL REAL IVEC2[]
+   DECL INT ISIZE
+   
+   ; Scope vars
+   DECL INT i
+   
+   ; Bound the output vector
+   OVEC[ISIZE + 1] = BOUND
+   
+   FOR i = 1 to ISIZE
+      OVEC[i] = IVEC1[i] + IVEC2[i]
+   ENDFOR
+   
+END
+
+;@brief Multiplies each element of a vector by a scalar
+;
+;  u =  v * a
+;
+;@in IVEC Vector
+;@in INUM Scalar
+;@in ISIZE Size of the vector
+;@out OVEC
+DEF VEC_X_SCAL(IVEC[]:OUT, INUM:IN, OVEC[]:OUT, ISIZE:IN)
+   
+   ; Inputs/outputs
+   DECL REAL OVEC[]
+   DECL REAL IVEC[]
+   DECL REAL INUM
+   DECL INT ISIZE
+   
+   ; Scope vars
+   DECL INT i
+   
+   ; Bound the vector
+   OVEC[ISIZE + 1] = BOUND
+   
+   FOR i = 1 to ISIZE
+      OVEC[i] = IVEC[i] * INUM
+   ENDFOR
+   
+END
+
+DEF MAT_SUB_MAT(IMAT1[,]:OUT, IMAT2[,]:OUT, OMAT[,]:OUT, IROWS:IN, ICOLS:IN)
+   DECL REAL IMAT1[,]
+   DECL REAL IMAT2[,]
+   DECL REAL OMAT[,]
+   DECL INT IROWS
+   DECL INT ICOLS
+   
+   DECL INT i,j
+   
+   FOR i = 1 TO ICOLS
+      FOR j = 1 TO IROWS
+         OMAT[i,j] = IMAT1[i,j] - IMAT2[i,j]
+      ENDFOR
+   ENDFOR
+END
+
+DEF MAT_X_SCAL(IMAT[,]:OUT, INUM:IN, OMAT[,]:OUT, IROWS:IN, ICOLS:IN)
+   DECL REAL IMAT[,]
+   DECL REAL INUM
+   DECL REAL OMAT[,]
+   DECL INT IROWS
+   DECL INT ICOLS
+   
+   DECL INT i,j
+   
+   FOR i = 1 TO ICOLS
+      FOR j = 1 TO IROWS
+         OMAT[i,j] = IMAT[i,j] * INUM
+      ENDFOR
+   ENDFOR
+END
+
+
+;*****************************************************************;
+;                                                                 ;
+;                          MATRIX OPERANDS                        ;
+;                                                                 ;
+;  This is the final section and it contains some basic matrix    ;
+;  functions (e.g. transposition, number of rows, etc.            ;
+;                                                                 ;
+;*****************************************************************;
+
+;@brief Returns the number of columns of a matrix
+DEFFCT INT MAT_SIZE_COL(IMAT[,]:OUT)
+
+   DECL REAL IMAT[,]
+   DECL INT RET_SIZE
+   DECL INT i
+   
+   RET_SIZE = 0
+   i = 1
+
+   WHILE ((IMAT[1, i] <> BOUND) AND (i <= 255))
+            i = i + 1
+   ENDWHILE
+   
+   RET_SIZE = i - 1
+   RETURN RET_SIZE
+
+ENDFCT
+
+;@brief Returns the number of rows of a matrix
+DEFFCT INT MAT_SIZE_ROW(IMAT[,]:OUT)
+   
+   DECL REAL IMAT[,]
+   DECL INT RET_SIZE
+   DECL INT i
+   
+   RET_SIZE = 0
+   i = 1
+
+   WHILE ((IMAT[i, 1] <> BOUND) AND (i <= 255))
+            i = i + 1
+   ENDWHILE
+   
+   RET_SIZE = i - 1
+   RETURN RET_SIZE
+
+ENDFCT
+
+;Creates the transpose of any matrix
+DEF MAT_TRANS(IMAT[,]:OUT, OMAT[,]:OUT, ICOL:IN, IROW:IN)
+
+   DECL REAL IMAT[,]
+   DECL REAL OMAT[,]
+   DECL INT ICOL
+   DECL INT IROW
+
+   DECL INT i,j
+   
+   FOR i = 1 TO ICOL STEP 1
+      FOR j = 1 TO IROW STEP 1
+         OMAT[i, j] = IMAT[j, i]
+      ENDFOR
+   ENDFOR
+
+END
+
+;@brief Takes a matrix and makes it into a 3x3 I matrix
+;
+;  Remember to always pass a 4x4 matrix so a boundry can be made
+;
+;@arg IOMAT[,] Matrix which will be made into an I matrix
+DEF MAT_MAKE_I(IOMAT[,]:OUT, ISIZE:IN)
+   
+   ; Declare inputs/outputs
+   DECL REAL IOMAT[,]
+   DECL INT ISIZE
+   
+   ; Declare scope variables
+   DECL INT i,j
+   
+   ; Right away I am going to put bounderies on the square matrix
+   IOMAT[(ISIZE+1),1] = BOUND
+   IOMAT[1,(ISIZE+1)] = BOUND
+   
+   FOR i = 1 TO ISIZE STEP 1
+      FOR j = 1 TO ISIZE STEP 1
+         IOMAT[i, j] = 0.0
+      ENDFOR
+      IOMAT[i,i] = 1.0
+   ENDFOR
+
+END
+
+;@brief Insert a matrix into a 3x3 matrix
+DEF MAT_INSERT(IMAT[,]:OUT, OMAT[,]:OUT, PIVOT:IN)
+   DECL REAL IMAT[,]
+   DECL REAL OMAT[,]
+   DECL INT PIVOT
+   
+   DECL INT i,j
+
+   MAT_MAKE_I(OMAT[,], 3)
+
+   FOR i = 1 TO (3-PIVOT)
+      FOR j = 1 TO (3-PIVOT)
+         OMAT[(i+PIVOT), (j+PIVOT)] = IMAT[i,j]
+      ENDFOR
+   ENDFOR
+   
+END
+
+
+
+
+
+
+

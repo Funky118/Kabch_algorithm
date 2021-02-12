@@ -1,0 +1,2250 @@
+
+Original matrix A = 
+[[cMatrix]]
+| 6 | 2 | 2 | 6 | 1 | 
+| 2 | 8 | 9 | 0 | 1 | 
+| 5 | 9 | 4 | 9 | 0 | 
+
+Transformed matrix B = 
+[[cMatrix]]
+| -7.42526 | -9.05879 | -4.7933 | -10.793 | -0.54525 | 
+| -3.14087 | -1.87598 | -4.63435 | -0.26945 | -1.26017 | 
+| -0.01961 | 7.9636 | 7.51978 | -0.66262 | 0.33862 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 4173.66 |
+| -478.274 |
+| -211.616 |
+Alpha 4206.3 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 8379.97 |
+| -478.274 |
+| -211.616 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.998058 |
+| -0.0569627 |
+| -0.0252036 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.99224 | 0.113704 | 0.0503093 | 
+| 0.113704 | 0.993511 | -0.00287133 | 
+| 0.0503093 | -0.00287133 | 0.99873 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.99224 | 0.113704 | 0.0503093 | 
+| 0.113704 | 0.993511 | -0.00287133 | 
+| 0.0503093 | -0.00287133 | 0.99873 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 385.653 |
+| -1397.36 |
+Alpha 1449.6 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 1835.25 |
+| -1397.36 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 0.795626 |
+| -0.605789 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -0.26604 | 0.963962 | 
+| 0.963962 | 0.26604 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -0.26604 | 0.963962 | 
+| 0 | 0.963962 | 0.26604 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 4242.93 |
+| 136.617 |
+| 9.83015 |
+Alpha 4245.14 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 8488.07 |
+| 136.617 |
+| 9.83015 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.99987 |
+| 0.0160931 |
+| 0.00115796 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.999479 | -0.0321819 | -0.00231562 | 
+| -0.0321819 | 0.999482 | -3.72703e-05 | 
+| -0.00231562 | -3.72703e-05 | 0.999997 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.999479 | -0.0321819 | -0.00231562 | 
+| -0.0321819 | 0.999482 | -3.72703e-05 | 
+| -0.00231562 | -3.72703e-05 | 0.999997 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 6152.66 |
+| 187.716 |
+Alpha 6155.53 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 12308.2 |
+| 187.716 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 0.999884 |
+| 0.0152495 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -0.999535 | -0.0304955 | 
+| -0.0304955 | 0.999535 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -0.999535 | -0.0304955 | 
+| 0 | -0.0304955 | 0.999535 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 4253.76 |
+| 198.535 |
+| -0.105578 |
+Alpha 4258.39 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 8512.14 |
+| 198.535 |
+| -0.105578 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.999728 |
+| 0.0233174 |
+| -1.23998e-05 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.998913 | -0.0466222 | 2.47929e-05 | 
+| -0.0466222 | 0.998913 | 5.78263e-07 | 
+| 2.47929e-05 | 5.78263e-07 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.998913 | -0.0466222 | 2.47929e-05 | 
+| -0.0466222 | 0.998913 | 5.78263e-07 | 
+| 2.47929e-05 | 5.78263e-07 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 6139.29 |
+| -1.38022 |
+Alpha 6139.29 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 12278.6 |
+| -1.38022 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| -0.000112409 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | 0.000224817 | 
+| 0.000224817 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | 0.000224817 | 
+| 0 | 0.000224817 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 4276.38 |
+| 286.227 |
+| 0.00112986 |
+Alpha 4285.95 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 8562.33 |
+| 286.227 |
+| 0.00112986 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.999442 |
+| 0.0334099 |
+| 1.31883e-07 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.997768 | -0.0667826 | -2.6362e-07 | 
+| -0.0667826 | 0.997768 | -8.81243e-09 | 
+| -2.6362e-07 | -8.81243e-09 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.997768 | -0.0667826 | -2.6362e-07 | 
+| -0.0667826 | 0.997768 | -8.81243e-09 | 
+| -2.6362e-07 | -8.81243e-09 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 6099.8 |
+| 0.0100895 |
+Alpha 6099.8 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 12199.6 |
+| 0.0100895 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| 8.27037e-07 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | -1.65407e-06 | 
+| -1.65407e-06 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | -1.65407e-06 | 
+| 0 | -1.65407e-06 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 4322.81 |
+| 407.361 |
+| -1.20137e-05 |
+Alpha 4341.96 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 8664.76 |
+| 407.361 |
+| -1.20137e-05 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.998897 |
+| 0.0469616 |
+| -1.38497e-09 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.995589 | -0.0938196 | 2.76688e-09 | 
+| -0.0938196 | 0.995589 | 1.30081e-10 | 
+| 2.76688e-09 | 1.30081e-10 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.995589 | -0.0938196 | 2.76688e-09 | 
+| -0.0938196 | 0.995589 | 1.30081e-10 | 
+| 2.76688e-09 | 1.30081e-10 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 6021.12 |
+| -7.3059e-05 |
+Alpha 6021.12 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 12042.2 |
+| -7.3059e-05 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| -6.0669e-09 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | 1.21338e-08 | 
+| 1.21338e-08 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | 1.21338e-08 | 
+| 0 | 1.21338e-08 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 4414.43 |
+| 564.899 |
+| 1.26092e-07 |
+Alpha 4450.42 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 8864.85 |
+| 564.899 |
+| 1.26092e-07 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.997976 |
+| 0.0635945 |
+| 1.41951e-11 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.991911 | -0.126932 | -2.83326e-11 | 
+| -0.126932 | 0.991911 | -1.80546e-12 | 
+| -2.83326e-11 | -1.80546e-12 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.991911 | -0.126932 | -2.83326e-11 | 
+| -0.126932 | 0.991911 | -1.80546e-12 | 
+| -2.83326e-11 | -1.80546e-12 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 5874.37 |
+| 5.20205e-07 |
+Alpha 5874.37 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 11748.7 |
+| 5.20205e-07 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| 4.42775e-11 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | -8.8555e-11 | 
+| -8.8555e-11 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | -8.8555e-11 | 
+| 0 | -8.8555e-11 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 4582.13 |
+| 745.644 |
+| -1.29118e-09 |
+Alpha 4642.4 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 9224.54 |
+| 745.644 |
+| -1.29118e-09 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.996749 |
+| 0.0805699 |
+| -1.39517e-13 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.987017 | -0.160616 | 2.78126e-13 | 
+| -0.160616 | 0.987017 | 2.24817e-14 | 
+| 2.78126e-13 | 2.24817e-14 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.987017 | -0.160616 | 2.78126e-13 | 
+| -0.160616 | 0.987017 | 2.24817e-14 | 
+| 2.78126e-13 | 2.24817e-14 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 5631.45 |
+| -3.61497e-09 |
+Alpha 5631.45 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 11262.9 |
+| -3.61497e-09 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| -3.20963e-13 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | 6.41925e-13 | 
+| 6.41925e-13 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | 6.41925e-13 | 
+| 0 | 6.41925e-13 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 4850.66 |
+| 904.5 |
+| 1.26748e-11 |
+Alpha 4934.27 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 9784.93 |
+| 904.5 |
+| 1.26748e-11 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.995755 |
+| 0.0920457 |
+| 1.28984e-15 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.983055 | -0.18331 | -2.56873e-15 | 
+| -0.18331 | 0.983055 | -2.37448e-16 | 
+| -2.56873e-15 | -2.37448e-16 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.983055 | -0.18331 | -2.56873e-15 | 
+| -0.18331 | 0.983055 | -2.37448e-16 | 
+| -2.56873e-15 | -2.37448e-16 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 5298.35 |
+| 2.45861e-11 |
+Alpha 5298.35 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 10596.7 |
+| 2.45861e-11 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| 2.32016e-15 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | -4.64033e-15 | 
+| -4.64033e-15 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | -4.64033e-15 | 
+| 0 | -4.64033e-15 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 5200.43 |
+| 971.239 |
+| -1.17062e-13 |
+Alpha 5290.34 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 10490.8 |
+| 971.239 |
+| -1.17062e-13 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.995742 |
+| 0.0921861 |
+| -1.11111e-17 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.983003 | -0.183587 | 2.21275e-17 | 
+| -0.183587 | 0.983003 | 2.04857e-18 | 
+| 2.21275e-17 | 2.04857e-18 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.983003 | -0.183587 | 2.21275e-17 | 
+| -0.183587 | 0.983003 | 2.04857e-18 | 
+| 2.21275e-17 | 2.04857e-18 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4941.73 |
+| -1.68487e-13 |
+Alpha 4941.73 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 9883.46 |
+| -1.68487e-13 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| -1.70474e-17 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | 3.40947e-17 | 
+| 3.40947e-17 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | 3.40947e-17 | 
+| 0 | 3.40947e-17 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 5551.25 |
+| 907.238 |
+| 1.00839e-15 |
+Alpha 5624.9 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 11176.2 |
+| 907.238 |
+| 1.00839e-15 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.996721 |
+| 0.0809101 |
+| 8.99315e-20 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.986907 | -0.16129 | -1.79273e-19 | 
+| -0.16129 | 0.986907 | -1.45527e-20 | 
+| -1.79273e-19 | -1.45527e-20 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.986907 | -0.16129 | -1.79273e-19 | 
+| -0.16129 | 0.986907 | -1.45527e-20 | 
+| -1.79273e-19 | -1.45527e-20 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4647.81 |
+| 1.22707e-15 |
+Alpha 4647.81 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 9295.62 |
+| 1.22707e-15 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| 1.32005e-19 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | -2.6401e-19 | 
+| -2.6401e-19 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | -2.6401e-19 | 
+| 0 | -2.6401e-19 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 5822.04 |
+| 749.644 |
+| -8.16984e-18 |
+Alpha 5870.1 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 11692.1 |
+| 749.644 |
+| -8.16984e-18 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.997951 |
+| 0.0639838 |
+| -6.97315e-22 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.991812 | -0.127705 | 1.39177e-21 | 
+| -0.127705 | 0.991812 | 8.92338e-23 | 
+| 1.39177e-21 | 8.92338e-23 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.991812 | -0.127705 | 1.39177e-21 | 
+| -0.127705 | 0.991812 | 8.92338e-23 | 
+| 1.39177e-21 | 8.92338e-23 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4453.66 |
+| -9.91564e-18 |
+Alpha 4453.66 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8907.33 |
+| -9.91564e-18 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| -1.1132e-21 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | 2.2264e-21 | 
+| 2.2264e-21 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | 2.2264e-21 | 
+| 0 | 2.2264e-21 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 5991.79 |
+| 568.757 |
+| 6.34259e-20 |
+Alpha 6018.73 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 12010.5 |
+| 568.757 |
+| 6.34259e-20 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.998881 |
+| 0.0473019 |
+| 5.27495e-24 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.995525 | -0.0944979 | -1.05381e-23 | 
+| -0.0944979 | 0.995525 | -4.9903e-25 | 
+| -1.05381e-23 | -4.9903e-25 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.995525 | -0.0944979 | -1.05381e-23 | 
+| -0.0944979 | 0.995525 | -4.9903e-25 | 
+| -1.05381e-23 | -4.9903e-25 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4343.69 |
+| 8.91971e-20 |
+Alpha 4343.69 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8687.37 |
+| 8.91971e-20 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| 1.02674e-23 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | -2.05349e-23 | 
+| -2.05349e-23 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | -2.05349e-23 | 
+| 0 | -2.05349e-23 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 6084.74 |
+| 410.469 |
+| -4.80242e-22 |
+Alpha 6098.57 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 12183.3 |
+| 410.469 |
+| -4.80242e-22 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.999433 |
+| 0.033672 |
+| -3.93956e-26 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.997732 | -0.0673058 | 7.87466e-26 | 
+| -0.0673058 | 0.997732 | 2.65306e-27 | 
+| 7.87466e-26 | 2.65306e-27 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.997732 | -0.0673058 | 7.87466e-26 | 
+| -0.0673058 | 0.997732 | 2.65306e-27 | 
+| 7.87466e-26 | 2.65306e-27 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4286.82 |
+| -8.69278e-22 |
+Alpha 4286.82 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8573.63 |
+| -8.69278e-22 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| -1.0139e-25 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | 2.0278e-25 | 
+| 2.0278e-25 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | 2.0278e-25 | 
+| 0 | 2.0278e-25 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 6131.9 |
+| 288.528 |
+| 3.58864e-24 |
+Alpha 6138.68 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 12270.6 |
+| 288.528 |
+| 3.58864e-24 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.999724 |
+| 0.0235073 |
+| 2.92378e-28 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.998895 | -0.0470015 | -5.84595e-28 | 
+| -0.0470015 | 0.998895 | -1.3746e-29 | 
+| -5.84595e-28 | -1.3746e-29 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.998895 | -0.0470015 | -5.84595e-28 | 
+| -0.0470015 | 0.998895 | -1.3746e-29 | 
+| -5.84595e-28 | -1.3746e-29 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4258.81 |
+| 8.8927e-24 |
+Alpha 4258.81 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8517.61 |
+| 8.8927e-24 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| 1.04404e-27 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | -2.08807e-27 | 
+| -2.08807e-27 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | -2.08807e-27 | 
+| 0 | -2.08807e-27 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 6154.89 |
+| 200.17 |
+| -2.66411e-26 |
+Alpha 6158.15 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 12313 |
+| 200.17 |
+| -2.66411e-26 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.999868 |
+| 0.0162546 |
+| -2.16337e-30 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.999472 | -0.032505 | 4.32616e-30 | 
+| -0.032505 | 0.999472 | 7.03295e-32 | 
+| 4.32616e-30 | 7.03295e-32 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.999472 | -0.032505 | 4.32616e-30 | 
+| -0.032505 | 0.999472 | 7.03295e-32 | 
+| 4.32616e-30 | 7.03295e-32 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4245.34 |
+| -9.33661e-26 |
+Alpha 4245.34 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8490.69 |
+| -9.33661e-26 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| -1.09963e-29 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | 2.19926e-29 | 
+| 2.19926e-29 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | 2.19926e-29 | 
+| 0 | 2.19926e-29 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 6165.89 |
+| 137.995 |
+| 1.97152e-28 |
+Alpha 6167.43 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 12333.3 |
+| 137.995 |
+| 1.97152e-28 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.999937 |
+| 0.0111881 |
+| 1.59843e-32 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.99975 | -0.0223748 | -3.19666e-32 | 
+| -0.0223748 | 0.99975 | -3.57667e-34 | 
+| -3.19666e-32 | -3.57667e-34 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.99975 | -0.0223748 | -3.19666e-32 | 
+| -0.0223748 | 0.99975 | -3.57667e-34 | 
+| -3.19666e-32 | -3.57667e-34 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4238.95 |
+| 9.93112e-28 |
+Alpha 4238.95 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8477.9 |
+| 9.93112e-28 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| 1.17141e-31 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | -2.34283e-31 | 
+| -2.34283e-31 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | -2.34283e-31 | 
+| 0 | -2.34283e-31 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 6171.1 |
+| 94.8456 |
+| -1.45678e-30 |
+Alpha 6171.83 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 12342.9 |
+| 94.8456 |
+| -1.45678e-30 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.99997 |
+| 0.00768397 |
+| -1.18022e-34 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.999882 | -0.0153675 | 2.36037e-34 | 
+| -0.0153675 | 0.999882 | 1.81376e-36 | 
+| 2.36037e-34 | 1.81376e-36 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.999882 | -0.0153675 | 2.36037e-34 | 
+| -0.0153675 | 0.999882 | 1.81376e-36 | 
+| 2.36037e-34 | 1.81376e-36 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4235.93 |
+| -1.06304e-29 |
+Alpha 4235.93 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8471.87 |
+| -1.06304e-29 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| -1.25478e-33 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | 2.50957e-33 | 
+| 2.50957e-33 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | 2.50957e-33 | 
+| 0 | 2.50957e-33 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 6173.56 |
+| 65.0957 |
+| 1.07567e-32 |
+Alpha 6173.9 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 12347.5 |
+| 65.0957 |
+| 1.07567e-32 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.999986 |
+| 0.00527191 |
+| 8.71155e-37 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.999944 | -0.0105437 | -1.74228e-36 | 
+| -0.0105437 | 0.999944 | -9.1853e-39 | 
+| -1.74228e-36 | -9.1853e-39 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.999944 | -0.0105437 | -1.74228e-36 | 
+| -0.0105437 | 0.999944 | -9.1853e-39 | 
+| -1.74228e-36 | -9.1853e-39 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4234.51 |
+| 1.14131e-31 |
+Alpha 4234.51 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8469.02 |
+| 1.14131e-31 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| 1.34763e-35 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | -2.69526e-35 | 
+| -2.69526e-35 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | -2.69526e-35 | 
+| 0 | -2.69526e-35 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 6174.72 |
+| 44.6473 |
+| -7.93994e-35 |
+Alpha 6174.88 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 12349.6 |
+| 44.6473 |
+| -7.93994e-35 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.999993 |
+| 0.00361526 |
+| -6.42927e-39 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.999974 | -0.00723048 | 1.28585e-38 | 
+| -0.00723048 | 0.999974 | 4.6487e-41 | 
+| 1.28585e-38 | 4.6487e-41 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.999974 | -0.00723048 | 1.28585e-38 | 
+| -0.00723048 | 0.999974 | 4.6487e-41 | 
+| 1.28585e-38 | 4.6487e-41 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4233.84 |
+| -1.22709e-33 |
+Alpha 4233.84 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8467.68 |
+| -1.22709e-33 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| -1.44915e-37 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | 2.8983e-37 | 
+| 2.8983e-37 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | 2.8983e-37 | 
+| 0 | 2.8983e-37 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 6175.26 |
+| 30.6127 |
+| 5.85986e-37 |
+Alpha 6175.34 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 12350.6 |
+| 30.6127 |
+| 5.85986e-37 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.999997 |
+| 0.00247863 |
+| 4.74458e-41 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.999988 | -0.00495725 | -9.48913e-41 | 
+| -0.00495725 | 0.999988 | -2.35202e-43 | 
+| -9.48913e-41 | -2.35202e-43 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.999988 | -0.00495725 | -9.48913e-41 | 
+| -0.00495725 | 0.999988 | -2.35202e-43 | 
+| -9.48913e-41 | -2.35202e-43 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4233.53 |
+| 1.32021e-35 |
+Alpha 4233.53 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8467.05 |
+| 1.32021e-35 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| 1.55923e-39 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | -3.11847e-39 | 
+| -3.11847e-39 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | -3.11847e-39 | 
+| 0 | -3.11847e-39 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 6175.52 |
+| 20.9867 |
+| -4.32439e-39 |
+Alpha 6175.55 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 12351.1 |
+| 20.9867 |
+| -4.32439e-39 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.999999 |
+| 0.00169918 |
+| -3.50122e-43 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.999994 | -0.00339835 | 7.00243e-43 | 
+| -0.00339835 | 0.999994 | 1.18984e-45 | 
+| 7.00243e-43 | 1.18984e-45 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.999994 | -0.00339835 | 7.00243e-43 | 
+| -0.00339835 | 0.999994 | 1.18984e-45 | 
+| 7.00243e-43 | 1.18984e-45 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4233.38 |
+| -1.42084e-37 |
+Alpha 4233.38 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8466.76 |
+| -1.42084e-37 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| -1.67814e-41 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | 3.35628e-41 | 
+| 3.35628e-41 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | 3.35628e-41 | 
+| 0 | 3.35628e-41 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 6175.64 |
+| 14.3865 |
+| 3.19115e-41 |
+Alpha 6175.65 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 12351.3 |
+| 14.3865 |
+| 3.19115e-41 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 0.999999 |
+| 0.00116478 |
+| 2.58365e-45 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.999997 | -0.00232955 | -5.1673e-45 | 
+| -0.00232955 | 0.999997 | -6.01875e-48 | 
+| -5.1673e-45 | -6.01875e-48 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.999997 | -0.00232955 | -5.1673e-45 | 
+| -0.00232955 | 0.999997 | -6.01875e-48 | 
+| -5.1673e-45 | -6.01875e-48 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4233.31 |
+| 1.52937e-39 |
+Alpha 4233.31 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8466.62 |
+| 1.52937e-39 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| 1.80636e-43 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | -3.61271e-43 | 
+| -3.61271e-43 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | -3.61271e-43 | 
+| 0 | -3.61271e-43 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 6175.69 |
+| 9.86171 |
+| -2.35484e-43 |
+Alpha 6175.7 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 12351.4 |
+| 9.86171 |
+| -2.35484e-43 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 1 |
+| 0.000798428 |
+| -1.90654e-47 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.999999 | -0.00159686 | 3.81308e-47 | 
+| -0.00159686 | 0.999999 | 3.04447e-50 | 
+| 3.81308e-47 | 3.04447e-50 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.999999 | -0.00159686 | 3.81308e-47 | 
+| -0.00159686 | 0.999999 | 3.04447e-50 | 
+| 3.81308e-47 | 3.04447e-50 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4233.28 |
+| -1.64631e-41 |
+Alpha 4233.28 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8466.55 |
+| -1.64631e-41 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| -1.94448e-45 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | 3.88897e-45 | 
+| 3.88897e-45 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | 3.88897e-45 | 
+| 0 | 3.88897e-45 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 6175.72 |
+| 6.75993 |
+| 1.7377e-45 |
+Alpha 6175.72 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 12351.4 |
+| 6.75993 |
+| 1.7377e-45 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 1 |
+| 0.000547299 |
+| 1.40688e-49 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -0.999999 | -0.0010946 | -2.81376e-49 | 
+| -0.0010946 | 0.999999 | -1.53997e-52 | 
+| -2.81376e-49 | -1.53997e-52 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -0.999999 | -0.0010946 | -2.81376e-49 | 
+| -0.0010946 | 0.999999 | -1.53997e-52 | 
+| -2.81376e-49 | -1.53997e-52 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4233.26 |
+| 1.77224e-43 |
+Alpha 4233.26 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8466.52 |
+| 1.77224e-43 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| 2.09323e-47 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | -4.18646e-47 | 
+| -4.18646e-47 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | -4.18646e-47 | 
+| 0 | -4.18646e-47 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 6175.73 |
+| 4.63372 |
+| -1.28228e-47 |
+Alpha 6175.73 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 12351.5 |
+| 4.63372 |
+| -1.28228e-47 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 1 |
+| 0.000375155 |
+| -1.03816e-51 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -1 | -0.000750311 | 2.07633e-51 | 
+| -0.000750311 | 1 | 7.78946e-55 | 
+| 2.07633e-51 | 7.78946e-55 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -1 | -0.000750311 | 2.07633e-51 | 
+| -0.000750311 | 1 | 7.78946e-55 | 
+| 2.07633e-51 | 7.78946e-55 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4233.25 |
+| -1.90784e-45 |
+Alpha 4233.25 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8466.51 |
+| -1.90784e-45 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| -2.25339e-49 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | 4.50678e-49 | 
+| 4.50678e-49 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | 4.50678e-49 | 
+| 0 | 4.50678e-49 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 6175.74 |
+| 3.17626 |
+| 9.46224e-50 |
+Alpha 6175.74 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 12351.5 |
+| 3.17626 |
+| 9.46224e-50 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 1 |
+| 0.000257156 |
+| 7.66082e-54 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -1 | -0.000514312 | -1.53216e-53 | 
+| -0.000514312 | 1 | -3.94005e-57 | 
+| -1.53216e-53 | -3.94005e-57 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -1 | -0.000514312 | -1.53216e-53 | 
+| -0.000514312 | 1 | -3.94005e-57 | 
+| -1.53216e-53 | -3.94005e-57 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4233.25 |
+| 2.05382e-47 |
+Alpha 4233.25 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8466.5 |
+| 2.05382e-47 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| 2.42582e-51 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | -4.85164e-51 | 
+| -4.85164e-51 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | -4.85164e-51 | 
+| 0 | -4.85164e-51 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 6175.74 |
+| 2.17721 |
+| -6.98238e-52 |
+Alpha 6175.74 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 12351.5 |
+| 2.17721 |
+| -6.98238e-52 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 1 |
+| 0.000176271 |
+| -5.65307e-56 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -1 | -0.000352543 | 1.13061e-55 | 
+| -0.000352543 | 1 | 1.99295e-59 | 
+| 1.13061e-55 | 1.99295e-59 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -1 | -0.000352543 | 1.13061e-55 | 
+| -0.000352543 | 1 | 1.99295e-59 | 
+| 1.13061e-55 | 1.99295e-59 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4233.25 |
+| -2.21098e-49 |
+Alpha 4233.25 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8466.5 |
+| -2.21098e-49 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| -2.61145e-53 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | 5.2229e-53 | 
+| 5.2229e-53 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | 5.2229e-53 | 
+| 0 | 5.2229e-53 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 6175.74 |
+| 1.4924 |
+| 5.15243e-54 |
+Alpha 6175.74 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 12351.5 |
+| 1.4924 |
+| 5.15243e-54 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 1 |
+| 0.000120828 |
+| 4.17151e-58 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -1 | -0.000241655 | -8.34302e-58 | 
+| -0.000241655 | 1 | -1.00807e-61 | 
+| -8.34302e-58 | -1.00807e-61 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -1 | -0.000241655 | -8.34302e-58 | 
+| -0.000241655 | 1 | -1.00807e-61 | 
+| -8.34302e-58 | -1.00807e-61 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4233.25 |
+| 2.38018e-51 |
+Alpha 4233.25 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8466.5 |
+| 2.38018e-51 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| 2.81129e-55 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | -5.62258e-55 | 
+| -5.62258e-55 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | -5.62258e-55 | 
+| 0 | -5.62258e-55 | 1 | 
+===========================QR SECTION==========================
+Vector x at 0 iter: 
+
+Vector contents:
+| 6175.74 |
+| 1.02299 |
+| -3.80208e-56 |
+Alpha 6175.74 at 0 iter: 
+
+Vector u at 0 iter: 
+
+Vector contents:
+| 12351.5 |
+| 1.02299 |
+| -3.80208e-56 |
+Vector v at 0 iter: 
+
+Vector contents:
+| 1 |
+| 8.2823e-05 |
+| -3.07824e-60 |
+Q_tmp at 0 iter: 
+
+[[cMatrix]]
+| -1 | -0.000165646 | 6.15648e-60 | 
+| -0.000165646 | 1 | 5.09898e-64 | 
+| 6.15648e-60 | 5.09898e-64 | 1 | 
+Q_heap(0)
+
+[[cMatrix]]
+| -1 | -0.000165646 | 6.15648e-60 | 
+| -0.000165646 | 1 | 5.09898e-64 | 
+| 6.15648e-60 | 5.09898e-64 | 1 | 
+===========================QR SECTION==========================
+Vector x at 1 iter: 
+
+Vector contents:
+| 4233.25 |
+| -2.56232e-53 |
+Alpha 4233.25 at 1 iter: 
+
+Vector u at 1 iter: 
+
+Vector contents:
+| 8466.5 |
+| -2.56232e-53 |
+Vector v at 1 iter: 
+
+Vector contents:
+| 1 |
+| -3.02642e-57 |
+Q_tmp at 1 iter: 
+
+[[cMatrix]]
+| -1 | 6.05285e-57 | 
+| 6.05285e-57 | 1 | 
+Q_heap(1)
+
+[[cMatrix]]
+| 1 | 0 | 0 | 
+| 0 | -1 | 6.05285e-57 | 
+| 0 | 6.05285e-57 | 1 | 
+===========================EIGEN SECTION==========================
+Eigenvalue matrix after 28 iterations of the QR algorithm
+[[cMatrix]]
+| 6175.74 | 1.02299 | 3.68848e-17 | 
+| 1.02299 | 4233.25 | -2.75836e-17 | 
+| -3.80208e-56 | -2.56232e-53 | 45.572 | 
+Eigenvector matrix Q_0:
+[[cMatrix]]
+| -0.99224 | 0.0182464 | 0.122991 | 
+| 0.113704 | -0.267082 | 0.956942 | 
+| 0.0503093 | 0.963501 | 0.262935 | 
+Eigenvector matrix after multiplying by Q_1:
+[[cMatrix]]
+| 0.990851 | -0.0539619 | 0.123699 | 
+| -0.107266 | 0.241338 | 0.964495 | 
+| -0.0818993 | -0.96894 | 0.233342 | 
+Eigenvector matrix Q_1
+[[cMatrix]]
+| -0.999479 | 0.0322376 | -0.00133314 | 
+| -0.0321819 | -0.999016 | -0.030517 | 
+| -0.00231562 | -0.0304582 | 0.999533 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_2:
+[[cMatrix]]
+| -0.987255 | 0.100127 | 0.123701 | 
+| 0.0959212 | -0.24586 | 0.964548 | 
+| 0.12699 | 0.96412 | 0.233122 | 
+Eigenvector matrix Q_2
+[[cMatrix]]
+| -0.998913 | 0.0466222 | 1.43114e-05 | 
+| -0.0466222 | -0.998913 | 0.000225151 | 
+| 2.47929e-05 | 0.000224239 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_3:
+[[cMatrix]]
+| 0.978364 | -0.165835 | 0.123701 | 
+| -0.0792882 | 0.251715 | 0.964548 | 
+| -0.191093 | -0.953487 | 0.233121 | 
+Eigenvector matrix Q_3
+[[cMatrix]]
+| -0.997768 | 0.0667826 | -1.53156e-07 | 
+| -0.0667826 | -0.997768 | -1.65919e-06 | 
+| -2.6362e-07 | -1.64526e-06 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_4:
+[[cMatrix]]
+| -0.95849 | 0.256893 | 0.123701 | 
+| 0.0553226 | -0.258044 | 0.964548 | 
+| 0.279706 | 0.931353 | 0.233121 | 
+Eigenvector matrix Q_4
+[[cMatrix]]
+| -0.995589 | 0.0938196 | 1.62849e-09 | 
+| -0.0938196 | -0.995589 | 1.22104e-08 | 
+| 2.76688e-09 | 1.20037e-08 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_5:
+[[cMatrix]]
+| 0.91813 | -0.376478 | 0.123701 | 
+| -0.0221212 | 0.262979 | 0.964548 | 
+| -0.395662 | -0.888317 | 0.233121 | 
+Eigenvector matrix Q_5
+[[cMatrix]]
+| -0.991911 | 0.126932 | -1.70922e-11 | 
+| -0.126932 | -0.991911 | -8.96442e-11 | 
+| -2.83326e-11 | -8.67495e-11 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_6:
+[[cMatrix]]
+| -0.845741 | 0.519056 | 0.123701 | 
+| -0.0204046 | -0.263118 | 0.964548 | 
+| 0.533203 | 0.813234 | 0.233121 | 
+Eigenvector matrix Q_6
+[[cMatrix]]
+| -0.987017 | 0.160616 | 1.75023e-13 | 
+| -0.160616 | -0.987017 | 6.56073e-13 | 
+| 2.78126e-13 | 6.19444e-13 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_7:
+[[cMatrix]]
+| 0.736262 | -0.665294 | 0.123701 | 
+| 0.0682909 | 0.254919 | 0.964548 | 
+| -0.673241 | -0.701713 | 0.233121 | 
+Eigenvector matrix Q_7
+[[cMatrix]]
+| -0.983055 | 0.18331 | -1.71811e-15 | 
+| -0.18331 | -0.983055 | -4.79915e-15 | 
+| -2.56873e-15 | -4.40288e-15 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_8:
+[[cMatrix]]
+| -0.601609 | 0.789154 | 0.123701 | 
+| -0.11393 | -0.238049 | 0.964548 | 
+| 0.790624 | 0.566188 | 0.233121 | 
+Eigenvector matrix Q_8
+[[cMatrix]]
+| -0.983003 | 0.183587 | 1.58681e-17 | 
+| -0.183587 | -0.983003 | 3.55638e-17 | 
+| 2.21275e-17 | 3.20461e-17 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_9:
+[[cMatrix]]
+| 0.46645 | -0.875855 | 0.123701 | 
+| 0.150833 | 0.216556 | 0.964548 | 
+| -0.871593 | -0.431255 | 0.233121 | 
+Eigenvector matrix Q_9
+[[cMatrix]]
+| -0.986907 | 0.16129 | -1.36691e-19 | 
+| -0.16129 | -0.986907 | -2.75106e-19 | 
+| -1.79273e-19 | -2.49458e-19 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_10:
+[[cMatrix]]
+| -0.350779 | 0.928252 | 0.123701 | 
+| -0.177254 | -0.195521 | 0.964548 | 
+| 0.91953 | 0.316417 | 0.233121 | 
+Eigenvector matrix Q_10
+[[cMatrix]]
+| -0.991812 | 0.127705 | 1.10745e-21 | 
+| -0.127705 | -0.991812 | 2.29741e-21 | 
+| 1.39177e-21 | 2.13717e-21 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_11:
+[[cMatrix]]
+| 0.261491 | -0.957246 | 0.123701 | 
+| 0.194937 | 0.177896 | 0.964548 | 
+| -0.945316 | -0.228107 | 0.233121 | 
+Eigenvector matrix Q_11
+[[cMatrix]]
+| -0.995525 | 0.0944979 | -8.59758e-24 | 
+| -0.0944979 | -0.995525 | -2.0942e-23 | 
+| -1.05381e-23 | -2.00358e-23 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_12:
+[[cMatrix]]
+| -0.19647 | 0.972675 | 0.123701 | 
+| -0.206468 | -0.164372 | 0.964548 | 
+| 0.958525 | 0.163965 | 0.233121 | 
+Eigenvector matrix Q_12
+[[cMatrix]]
+| -0.997732 | 0.0673058 | 6.50983e-26 | 
+| -0.0673058 | -0.997732 | 2.04973e-25 | 
+| 7.87466e-26 | 2.00126e-25 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_13:
+[[cMatrix]]
+| 0.150536 | -0.980835 | 0.123701 | 
+| 0.213966 | 0.154486 | 0.964548 | 
+| -0.965172 | -0.118731 | 0.233121 | 
+Eigenvector matrix Q_13
+[[cMatrix]]
+| -0.998895 | 0.0470015 | -4.86452e-28 | 
+| -0.0470015 | -0.998895 | -2.09951e-27 | 
+| -5.84595e-28 | -2.07433e-27 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_14:
+[[cMatrix]]
+| -0.118574 | 0.98521 | 0.123701 | 
+| -0.218874 | -0.14745 | 0.964548 | 
+| 0.968522 | 0.0872956 | 0.233121 | 
+Eigenvector matrix Q_14
+[[cMatrix]]
+| -0.999472 | 0.032505 | 3.61129e-30 | 
+| -0.032505 | -0.999472 | 2.20513e-29 | 
+| 4.32616e-30 | 2.19223e-29 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_15:
+[[cMatrix]]
+| 0.0965008 | -0.987616 | 0.123701 | 
+| 0.222118 | 0.142515 | 0.964548 | 
+| -0.970232 | -0.0656033 | 0.233121 | 
+Eigenvector matrix Q_15
+[[cMatrix]]
+| -0.99975 | 0.0223748 | -2.67246e-32 | 
+| -0.0223748 | -0.99975 | -2.34582e-31 | 
+| -3.19666e-32 | -2.33925e-31 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_16:
+[[cMatrix]]
+| -0.0813123 | 0.988982 | 0.123701 | 
+| -0.224282 | -0.139085 | 0.964548 | 
+| 0.971126 | 0.0506855 | 0.233121 | 
+Eigenvector matrix Q_16
+[[cMatrix]]
+| -0.999882 | 0.0153675 | 1.97472e-34 | 
+| -0.0153675 | -0.999882 | 2.51108e-33 | 
+| 2.36037e-34 | 2.50775e-33 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_17:
+[[cMatrix]]
+| 0.0708802 | -0.989785 | 0.123701 | 
+| 0.225736 | 0.136713 | 0.964548 | 
+| -0.971606 | -0.0404435 | 0.233121 | 
+Eigenvector matrix Q_17
+[[cMatrix]]
+| -0.999944 | 0.0105437 | -1.45811e-36 | 
+| -0.0105437 | -0.999944 | -2.69603e-35 | 
+| -1.74228e-36 | -2.69434e-35 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_18:
+[[cMatrix]]
+| -0.0637217 | 0.990271 | 0.123701 | 
+| -0.226719 | -0.135077 | 0.964548 | 
+| 0.971873 | 0.0334172 | 0.233121 | 
+Eigenvector matrix Q_18
+[[cMatrix]]
+| -0.999974 | 0.00723048 | 1.07629e-38 | 
+| -0.00723048 | -0.999974 | 2.89869e-37 | 
+| 1.28585e-38 | 2.89783e-37 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_19:
+[[cMatrix]]
+| 0.0588119 | -0.990575 | 0.123701 | 
+| 0.227386 | 0.133951 | 0.964548 | 
+| -0.972027 | -0.028599 | 0.233121 | 
+Eigenvector matrix Q_19
+[[cMatrix]]
+| -0.999988 | 0.00495725 | -7.94323e-41 | 
+| -0.00495725 | -0.999988 | -3.11866e-39 | 
+| -9.48913e-41 | -3.11823e-39 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_20:
+[[cMatrix]]
+| -0.0554453 | 0.990769 | 0.123701 | 
+| -0.22784 | -0.133178 | 0.964548 | 
+| 0.972119 | 0.0252956 | 0.233121 | 
+Eigenvector matrix Q_20
+[[cMatrix]]
+| -0.999994 | 0.00339835 | 5.86185e-43 | 
+| -0.00339835 | -0.999994 | 3.35638e-41 | 
+| 7.00243e-43 | 3.35617e-41 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_21:
+[[cMatrix]]
+| 0.0531371 | -0.990896 | 0.123701 | 
+| 0.228149 | 0.132647 | 0.964548 | 
+| -0.972175 | -0.0230309 | 0.233121 | 
+Eigenvector matrix Q_21
+[[cMatrix]]
+| -0.999997 | 0.00232955 | -4.32571e-45 | 
+| -0.00232955 | -0.999997 | -3.61276e-43 | 
+| -5.1673e-45 | -3.61265e-43 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_22:
+[[cMatrix]]
+| -0.0515547 | 0.990979 | 0.123701 | 
+| -0.228361 | -0.132282 | 0.964548 | 
+| 0.972211 | 0.0214784 | 0.233121 | 
+Eigenvector matrix Q_22
+[[cMatrix]]
+| -0.999999 | 0.00159686 | 3.19207e-47 | 
+| -0.00159686 | -0.999999 | 3.88899e-45 | 
+| 3.81308e-47 | 3.88893e-45 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_23:
+[[cMatrix]]
+| 0.0504699 | -0.991035 | 0.123701 | 
+| 0.228506 | 0.132032 | 0.964548 | 
+| -0.972234 | -0.0204142 | 0.233121 | 
+Eigenvector matrix Q_23
+[[cMatrix]]
+| -0.999999 | 0.0010946 | -2.35551e-49 | 
+| -0.0010946 | -0.999999 | -4.18648e-47 | 
+| -2.81376e-49 | -4.18645e-47 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_24:
+[[cMatrix]]
+| -0.0497263 | 0.991073 | 0.123701 | 
+| -0.228605 | -0.131861 | 0.964548 | 
+| 0.972249 | 0.0196848 | 0.233121 | 
+Eigenvector matrix Q_24
+[[cMatrix]]
+| -1 | 0.000750311 | 1.73818e-51 | 
+| -0.000750311 | -1 | 4.50679e-49 | 
+| 2.07633e-51 | 4.50677e-49 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_25:
+[[cMatrix]]
+| 0.0492166 | -0.991098 | 0.123701 | 
+| 0.228672 | 0.131743 | 0.964548 | 
+| -0.972259 | -0.0191847 | 0.233121 | 
+Eigenvector matrix Q_25
+[[cMatrix]]
+| -1 | 0.000514312 | -1.28264e-53 | 
+| -0.000514312 | -1 | -4.85164e-51 | 
+| -1.53216e-53 | -4.85164e-51 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_26:
+[[cMatrix]]
+| -0.0488672 | 0.991116 | 0.123701 | 
+| -0.228719 | -0.131662 | 0.964548 | 
+| 0.972265 | 0.018842 | 0.233121 | 
+Eigenvector matrix Q_26
+[[cMatrix]]
+| -1 | 0.000352543 | 9.46484e-56 | 
+| -0.000352543 | -1 | 5.2229e-53 | 
+| 1.13061e-55 | 5.2229e-53 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_27:
+[[cMatrix]]
+| 0.0486277 | -0.991127 | 0.123701 | 
+| 0.228751 | 0.131607 | 0.964548 | 
+| -0.97227 | -0.018607 | 0.233121 | 
+Eigenvector matrix Q_27
+[[cMatrix]]
+| -1 | 0.000241655 | -6.98429e-58 | 
+| -0.000241655 | -1 | -5.62258e-55 | 
+| -8.34302e-58 | -5.62258e-55 | 1 | 
+Number of iterations: 28
+Eigenvector matrix after multiplying by Q_28:
+[[cMatrix]]
+| -0.0484635 | 0.991135 | 0.123701 | 
+| -0.228772 | -0.131569 | 0.964548 | 
+| 0.972273 | 0.0184459 | 0.233121 | 
+Eigenvector matrix Q_28
+[[cMatrix]]
+| -1 | 0.000165646 | 5.15384e-60 | 
+| -0.000165646 | -1 | 6.05285e-57 | 
+| 6.15648e-60 | 6.05285e-57 | 1 | 
+Number of iterations: 28
+===========================SVD SECTION==========================
+A*A' = 
+[[cMatrix]]
+| 4173.66 | -478.274 | -211.616 | 
+| -478.274 | 438.938 | -1373.78 | 
+| -211.616 | -1373.78 | 5841.96 | 
+
+Eigenvectors of A*A' (U) = 
+
+[[cMatrix]]
+| -0.0484635 | 0.991135 | 0.123701 | 
+| -0.228772 | -0.131569 | 0.964548 | 
+| 0.972273 | 0.0184459 | 0.233121 | 
+
+Singular values of A'*A (S) = 
+
+[[cMatrix]]
+| 78.5859 | 0 | 0 | 
+| 0 | 65.0634 | 0 | 
+| 0 | 0 | 6.7507 | 
+
+Eigenvectors of A'*A (V) = 
+
+[[cMatrix]]
+| -0.293268 | -0.419707 | -0.858996 | 
+| 0.937198 | 0.0513905 | -0.345011 | 
+| 0.188823 | -0.906204 | 0.378277 | 
+
+
+Q_U = 
+[[cMatrix]]
+| -1 | 0.000165646 | 5.15384e-60 | 
+| -0.000165646 | -1 | 6.05285e-57 | 
+| 6.15648e-60 | 6.05285e-57 | 1 | 
+Q_U iter = 28
+Q_V = 
+[[cMatrix]]
+| 0 | 0 | 0 | 0 | 
+| 0 | 0 | 0 | 0 | 
+| 0 | 0 | 0 | 0 | 
+| 0 | 0 | 0 | 0 | 
+Q_V iter = 2685004
+
+
+
+Original matrix A = U*S*V' = 
+[[cMatrix]]
+| -26.6659 | -0.54347 | -58.8413 | 
+| 3.27204 | -19.5356 | 6.82581 | 
+| -24.2632 | 71.1271 | 13.9351 | 
+===========================KABSCH SECTION==========================
+
+Centroid of A = 
+Vector contents:
+| 3.4 |
+| 4 |
+| 5.4 |
+
+Centroid of B = 
+Vector contents:
+| -6.52312 |
+| -2.23616 |
+| 3.02795 |
+
+A - centroidA =
+[[cMatrix]]
+| 2.6 | -1.4 | -1.4 | 2.6 | -2.4 | 
+| -2 | 4 | 5 | -4 | -3 | 
+| -0.4 | 3.6 | -1.4 | 3.6 | -5.4 | 
+
+B - centroidB =
+[[cMatrix]]
+| -0.902144 | -2.53567 | 1.72982 | -4.26986 | 5.97787 | 
+| -0.904706 | 0.360184 | -2.39819 | 1.96671 | 0.975994 | 
+| -3.04756 | 4.93565 | 4.49183 | -3.69057 | -2.68933 | 
+
+H = 
+[[cMatrix]]
+| -26.6659 | -0.54347 | -58.8413 | 
+| 3.27204 | -19.5356 | 6.82581 | 
+| -24.2632 | 71.1271 | 13.9351 | 
+
+Det of R = 1
+
+Rotation matrix = 
+[[cMatrix]]
+| -0.508033 | -0.706231 | -0.493128 | 
+| -0.0371632 | -0.553946 | 0.831731 | 
+| -0.860528 | 0.440898 | 0.255056 | 
+
+R * B = 
+[[cMatrix]]
+| 6.00012 | 1.99996 | 1.99986 | 6.00024 | 0.999993 | 
+| 1.99951 | 7.99942 | 8.99975 | -0.00075885 | 0.99997 | 
+| 4.99984 | 8.99939 | 3.99946 | 8.99986 | -3.58895e-05 | 
+
+Translation matrix = 
+Vector contents:
+| -3.49404e-05 |
+| 0.000423588 |
+| 0.000296312 |
+
+Result of the algorithm: 
+
+R * B + t = A
+[[cMatrix]]
+| 6.00009 | 1.99993 | 1.99983 | 6.0002 | 0.999958 | 
+| 1.99993 | 7.99984 | 9.00017 | -0.000335262 | 1.00039 | 
+| 5.00014 | 8.99969 | 3.99976 | 9.00015 | 0.000260422 | 
+
+Original matrix A = 
+[[cMatrix]]
+| 6 | 2 | 2 | 6 | 1 | 
+| 2 | 8 | 9 | 0 | 1 | 
+| 5 | 9 | 4 | 9 | 0 | 
+
+Transformed matrix B = 
+[[cMatrix]]
+| -7.42526 | -9.05879 | -4.7933 | -10.793 | -0.54525 | 
+| -3.14087 | -1.87598 | -4.63435 | -0.26945 | -1.26017 | 
+| -0.01961 | 7.9636 | 7.51978 | -0.66262 | 0.33862 | 
